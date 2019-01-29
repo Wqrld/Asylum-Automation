@@ -10,12 +10,12 @@ module.exports.run = async (Discord, client, message, commands, args) => {
             return;
         }
         const embed = new Discord.RichEmbed()
-        .setColor(0xdd2e44)
-        .setTitle("Nord")
+        .setColor(0x1edb3e)
+        .setTitle("Toby")
         .setFooter("Order")
-        .setThumbnail(`https://cdn.discordapp.com/icons/517394741911093268/dcb6541de2cfe06300aa132a40b8cbff.webp`)
+        .setThumbnail(`https://cdn.discordapp.com/attachments/497107570033688601/539543286507896842/Asylum_Setups_logo_sml.png`)
         //.setImage('https://ferox.host/assets/images/logo.png')
-        .addField(`Order` , ` React with 🎟 to open up a ticket`)
+        .addField(`Order` , ` React with 🎟 to open a ticket.`)
         .setTimestamp();
     message.channel.send({
         embed: embed

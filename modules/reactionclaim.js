@@ -25,7 +25,7 @@ module.exports = async function(client) {
         client.emit(events[event.t], reaction, user);
     });
     
-
+//t
 
     client.on('messageReactionAdd', (reaction, user) => {
 

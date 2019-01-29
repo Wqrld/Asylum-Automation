@@ -8,16 +8,16 @@ module.exports.run = async (Discord, client, message, args) => {
             return message.reply("User not found.")
           }
         message.channel.overwritePermissions(user, {
-            SEND_MESSAGES: true,
-            READ_MESSAGES: true
+            SEND_MESSAGES: false,
+            READ_MESSAGES: false
         });
-        message.channel.send("added " + user);
+        message.channel.send("removed " + user);
 
     
 
 }
 
 module.exports.command = {
-  name:"add",
+  name:"remove",
   info:"Add someone to your ticket"
 }
