@@ -1,22 +1,22 @@
 module.exports.run = async (Discord, client, message, commands) => {
+  var config = require("../config.json");
+  const embed = new Discord.RichEmbed()
+    .setColor(0x3366ff)
+    .setThumbnail(config.logo)
+    .setFooter("Bot by Wqrld");
 
-                const embed = new Discord.RichEmbed()
-            .setColor(0x3366ff)
-            .setThumbnail(`https://ferox.host/assets/images/logo.png`)
-            .setFooter("Bot by Wqrld")
-for (var [key, value] of commands) {
-  embed.addField(key, value)
-}
+  var messages = "**Commands**\n";
+  for (var [key, value] of commands) {
+    messages += key + "\n";
+  }
+  embed.setDescription(messages);
 
-              
-        message.channel.send({
-            embed: embed
-        });
-    
-
-}
+  message.channel.send({
+    embed: embed
+  });
+};
 
 module.exports.command = {
-  name:"help",
-  info:"Shows all loaded commands"
-}
+  name: "help",
+  info: "Shows all loaded commands"
+};

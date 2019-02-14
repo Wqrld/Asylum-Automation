@@ -1,4 +1,5 @@
 var utils = require("../lib/utils.js");
+const fs = require("fs");
 function createchannel(message, c){
             let role = message.guild.roles.find("name", "*");
             let role2 = message.guild.roles.find("name", "@everyone");
