@@ -106,7 +106,7 @@ function requestdeadline(user, m) {
           embed: embed
         });
         var role;
-        var channel = client.channels.get("539834479267545088");
+        var channel = client.channels.get(config.comissionchannel);
 
         console.log("role:" + tickets[m.channel.id].role);
         if (
@@ -231,7 +231,7 @@ function initwizard(reaction, user) {
           }
         ])
         .then(c => {
-          c.setParent("539545176281186324");
+          c.setParent(config.newchannel);
 
           utils.createchannel(reaction.message, c, function() {
             welcomemsg(reaction.message.author.username, c, function(message) {

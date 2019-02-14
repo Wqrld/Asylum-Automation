@@ -16,6 +16,7 @@ function createchannel(message, c){
             });
 
 }
+let config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 module.exports.run = async (Discord, client, message, args) => {
 
  //const reason = message.content.split(" ").slice(1).join(" ");
@@ -25,7 +26,7 @@ module.exports.run = async (Discord, client, message, args) => {
 
         //     if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
         message.guild.createChannel(`ticket-HR-${id}`, "text").then(c => {
-            c.setParent('539840786938986526');
+            c.setParent(config.hrchannel);
             createchannel(message, c);
 
 
