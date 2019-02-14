@@ -26,5 +26,5 @@ const newembed = new Discord.RichEmbed()
 }
 
 module.exports.command = {
-  name:"suggest"
+  name:"suggest23423"
 }

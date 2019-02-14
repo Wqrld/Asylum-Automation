@@ -2,33 +2,31 @@ var util = require('util')
 const sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('./db.db');
 var moment = require('moment');
-
-module.exports.run = async (Discord, client, message, args) => {
-
+let config = JSON.parse(fs.readFileSync("config.json", "utf8"));
+module.exports.run = async (Discord, client, message, commands, args) => {
+    let config = JSON.parse(fs.readFileSync("config.json", "utf8"));
  if (!message.member.permissions.has("KICK_MEMBERS")) {
             message.reply("This command can onyl be used by staff members");
             message.react('❌');
             return;
         }
         const embed = new Discord.RichEmbed()
-        .setColor(0xdd2e44)
-        .setTitle("Stats")
-        .setFooter("Stats")
-        .setThumbnail(`https://ferox.host/assets/images/logo.png`)
+        .setColor(0x1edb3e)
+        .setTitle(config.name)
+        .setFooter("Order")
+        .setThumbnail(config.logo)
         //.setImage('https://ferox.host/assets/images/logo.png')
-        .addField(`Open tickets`, '0', true)
-        .addField(`Open orders`, '0', true)
-        .addField(`Total clients`, '5', true)
-        .addField(`Income`, 'hidden', true)
-        .addBlankField()
-        .addField(`Discord members`, message.channel.guild.memberCount, true)
-        .addField(`Staff`, '4', true)
+        .addField(`Order` , ` React with 🎟 to open a ticket.`)
         .setTimestamp();
     message.channel.send({
         embed: embed
+    }).then(function(m){
+m.react("🎟");
+//done
     });
+
 }
 
 module.exports.command = {
-  name:"stats"
+  name:"init"
 }

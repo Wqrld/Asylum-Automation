@@ -1,3 +1,4 @@
+var utils = require("../lib/utils.js");
 module.exports.run = async (Discord, client, message, args) => {
 
         if (!message.channel.name.startsWith(`ticket-`) && !message.channel.name.startsWith(`order-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
@@ -11,7 +12,9 @@ module.exports.run = async (Discord, client, message, args) => {
             SEND_MESSAGES: false,
             READ_MESSAGES: false
         });
-        message.channel.send("removed " + user);
+        message.channel.send({
+          embed: utils.createembed(null, "removed " + user)
+        });
 
     
 

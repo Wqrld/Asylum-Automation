@@ -20,7 +20,7 @@ module.exports.run = async (Discord, client, message, args) => {
 
 
                 const embed = new Discord.RichEmbed()
-                .setColor(0xdd2e44)
+                .setColor(0x55acee)
                 .setTitle("Invoice status")
                 .setFooter("Invoice status")
                // .setThumbnail(`https://ferox.host/assets/images/logo.png`)

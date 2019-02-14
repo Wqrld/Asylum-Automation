@@ -1,0 +1,31 @@
+{
+    "542384556502810625": {
+        "type": "comission",
+        "client": "159302240929054720",
+        "role": "Builder",
+        "payment": "100%",
+        "message": "big cake",
+        "budget": "das",
+        "price": "0"
+    },
+    "542384927992315935": {
+        "type": "comission",
+        "client": "159302240929054720",
+        "role": "Builder",
+        "payment": "100%",
+        "message": "a cake",
+        "budget": "das",
+        "deadline": "d",
+        "price": "0"
+    },
+    "543174995359170561": {
+        "type": "comission",
+        "client": "382596301755514883",
+        "role": "Builder",
+        "payment": "100%",
+        "message": "T",
+        "budget": "T",
+        "deadline": "T",
+        "freelancer": "159302240929054720"
+    }
+}

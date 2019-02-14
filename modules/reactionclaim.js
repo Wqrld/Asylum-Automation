@@ -1,79 +1,53 @@
 const Discord = require("discord.js");
-var redis = require("redis"),
-    red = redis.createClient();
-const events = {
-    MESSAGE_REACTION_ADD: 'messageReactionAdd',
-    MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
-};
-module.exports = async function(client) {
+const fs = require("fs");
 
-    client.on('raw', async event => {
-        if (!events.hasOwnProperty(event.t)) return;
-    
-        const {
-            d: data
-        } = event;
-        const user = client.users.get(data.user_id);
-        const channel = client.channels.get(data.channel_id) || await user.createDM();
-    
-        if (channel.messages.has(data.message_id)) return;
-    
-        const message = await channel.fetchMessage(data.message_id);
-        const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
-        const reaction = message.reactions.get(emojiKey);
-    
-        client.emit(events[event.t], reaction, user);
-    });
+    function savetickets(tickets) {
+        fs.writeFile("tickets.json", JSON.stringify(tickets, null, 4));
+      }
+
+module.exports = async function(client) {
+    let config = JSON.parse(fs.readFileSync("config.json", "utf8"));
+
     
 //t
 
     client.on('messageReactionAdd', (reaction, user) => {
 
-        if (reaction.message.channel != reaction.message.guild.channels.find(c => c.name == "commissions")) return;
+        if (reaction.message.channel != reaction.message.guild.channels.find(c => c.id == "539834479267545088")) return;
 
-        if (!user.bot && reaction.emoji.name === "✅") {
+        if (!user.bot && reaction.emoji.name === "✅" && config.ticketsenabled) {
 
-            
+            let tickets = JSON.parse(fs.readFileSync("tickets.json", "utf8"));
           //  client.channels.get('518433045330526243');
           //  reaction.member.roles.has('518425575136952330')
 
-
+        //   if (!tickets[c.id]) tickets[c.id] = {
+        //     type: 'comission',
+        //     client: user.id,
+        //     role: undefined,
+        //     payment: undefined,
+        //     price: undefined,
+        //     freelancer: undefined,
+        //     message: undefined,
+        //     budget: undefined,
+        //   };
        
     
             var id = reaction.message.embeds[0].fields[5].value;
-            var channel = client.guilds.get('517394741911093268').channels.find(c => c.name == id);
+            var channel = client.guilds.get(config.guildid).channels.find(c => c.name == id);
 
 //if(reaction.member.roles.has('518425575136952330')){}
 
 //let channel = reaction.guild.channels.find("name", "@everyone");
 console.log(reaction.count)
-if(reaction.count > 2){
+if(tickets[channel.id].freelancer != undefined){
 user.send("This commission was already claimed by someone else.")
 reaction.remove(user);
     return;
 }
-
-
-
- red.get(
-     "role" + channel.name.replace("complete", "ticket"),
-     function(err, role) {
-         console.log(role)
-         console.log(client.guilds.get('517394741911093268').roles.find(r => r.id == role))
-     //    console.log(role)
- var crole = client.guilds.get('517394741911093268').roles.find(r => r.name == role).name
- var srole = reaction.message.guild.roles.find(c => c.name == crole)
-
-
- let usery = reaction.message.guild.members.find(user => user.id == message.author.id);
-
- if(usery.roles.has(srole.id)){
-
-
-
-
+ 
             console.log(id + "\n" + channel)
-            red.set("freelancer" + reaction.message.channel.name, user.id, redis.print);
+           // red.set("freelancer" + reaction.message.channel.name, user.id, redis.print);
             var embed = new Discord.RichEmbed()
                 .setColor('#36393f')
                 .addField(`Commission claimed`,
@@ -82,7 +56,9 @@ reaction.remove(user);
             channel.send({
                 embed: embed
             })
-            red.set("freelancer" + channel.name, user.id, redis.print);
+            tickets[channel.id].freelancer = user.id;
+            savetickets(tickets);
+           // red.set("freelancer" + channel.name, user.id, redis.print);
              channel.send("<@" + user.id + ">").then((m) => {
               m.delete();
                  })
@@ -91,12 +67,7 @@ reaction.remove(user);
                 READ_MESSAGES: true
             });
     
-         }else{
-             reaction.remove(user)
-             user.send("You cannot accept this commission as you do not have the required role.")
-            }
-         });
-    }
+        }
     
     });
 

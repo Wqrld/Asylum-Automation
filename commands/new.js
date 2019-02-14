@@ -1,4 +1,4 @@
-
+var utils = require("../lib/utils.js");
 function createchannel(message, c){
             let role = message.guild.roles.find("name", "*");
             let role2 = message.guild.roles.find("name", "@everyone");
@@ -17,7 +17,11 @@ function createchannel(message, c){
 
 }
 module.exports.run = async (Discord, client, message, args) => {
-message.channel.send("Head to <#539542141265772554> to open up a ticket.").then(function(m){
+
+message.channel.send({
+    embed: utils.createembed(null, "Head to <#539542141265772554> to open up a ticket.")
+  })
+.then(function(m){
     setTimeout(function(){m.delete()}, 3000);
 })
 //  const reason = message.content.split(" ").slice(1).join(" ");

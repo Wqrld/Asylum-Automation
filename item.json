@@ -1,21 +1,21 @@
 {
     
     "merchant_info": {
-        "email": "hjason@mail.ccsf.edu",
-        "business_name": "Nord"
+        "email": "finance@simplify.gg",
+        "business_name": "Asylum Automated"
     },
     "billing_info": [{
-        "email": "hjason@mail.ccsf.edu"
+        "email": "finance@simplify.gg"
     }],
     "items": [{
-        "name": "Nord",
+        "name": "Asylum",
         "quantity": 1,
         "unit_price": {
-            "currency": "EUR",
+            "currency": "USD",
             "value": 1
         }
     }],
-    "note": "Nord is never required to refund you. By ordering you agree to not chargeback.",
+    "note": "Asylum is never required to refund you. By ordering you agree to not chargeback.",
     "payment_term": {
         "term_type": "NET_45"
     },
