@@ -30,7 +30,7 @@ module.exports.run = async function(Discord, client, message, args) {
   const embed = new Discord.RichEmbed()
     .setColor(0x55acee)
     .setTitle("Close")
-    .setFooter("Bot by Wqrld")
+    .setFooter("")
     .addField(
       `Are you sure?`,
       `Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, react with ✅.`
@@ -93,7 +93,7 @@ module.exports.run = async function(Discord, client, message, args) {
                 const embed = new Discord.RichEmbed()
                   .setColor(0x55acee)
                   .setTitle("Ticket closed")
-                  .setFooter("Bot by Wqrld")
+                  .setFooter("Made by Asylum Setups | Wqrld#7373")
                   .addField(`Ticket`, message.channel.name)
                   .addField(`Transcript`, "https://hastebin.com/" + json.key)
                   .addField(

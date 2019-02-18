@@ -1,8 +1,7 @@
 module.exports.run = async (Discord, client, m, args) => {
 
     if (m.member.hasPermission("KICK_MEMBERS")) {
-      console.log(m.mentions)
-        if(!m.mentions.users[0]){
+      if(!m.mentions.members.first()){
             return m.channel.send("specify a user to mute")
         }
 m.mentions.users[0].addRole('544593174895656961')

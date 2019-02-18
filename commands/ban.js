@@ -1,7 +1,7 @@
 module.exports.run = async (Discord, client, m, args) => {
 
     if (m.member.hasPermission("KICK_MEMBERS")) {
-        if(!m.mentions[0]){
+      if(!m.mentions.members.first()){
             return m.channel.send("specify a user to ban")
         }
         m.mentions[0].ban({

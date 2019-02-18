@@ -16,7 +16,7 @@ module.exports = async function(client) {
             console.log(responseObject[message.content]);
             const embed = new Discord.RichEmbed()
                 .setColor(0xCF40FA)
-                .setFooter("Bot by Wqrld")
+                .setFooter("Made by Asylum Setups | Wqrld#7373")
                 .addField(message.content, responseObject[message.content])
             message.channel.send({
                 embed: embed

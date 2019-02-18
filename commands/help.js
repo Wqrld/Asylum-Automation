@@ -3,13 +3,42 @@ module.exports.run = async (Discord, client, message, commands) => {
   const embed = new Discord.RichEmbed()
     .setColor(0x3366ff)
     .setThumbnail(config.logo)
-    .setFooter("Bot by Wqrld");
+    .setFooter("Made by Asylum Setups | Wqrld#7373");
 
-  var messages = "**Commands**\n";
-  for (var [key, value] of commands) {
-    messages += key + "\n";
-  }
-  embed.setDescription(messages);
+
+  embed.setDescription(`
+  **Commands**
+
+  **tickets**
+  -add
+  -remove
+  -close
+  -hr
+  -revert
+  -pending
+  -complete
+
+  **Freelancer commands**
+  -cut
+  -paypal
+  -portfolio
+
+  **Invoicing**
+  -invoice
+  -status
+
+  **Info commands**
+  -links
+  -info
+  -tos
+  
+  **Staff**
+  -kick
+  -ban
+  -mute
+  -clear
+  -embed
+  `);
 
   message.channel.send({
     embed: embed

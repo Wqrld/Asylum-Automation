@@ -123,7 +123,7 @@ function requestdeadline(user, m) {
         var embed = new Discord.RichEmbed()
           .setColor(0x55acee)
           .setTitle("Commission")
-          .setFooter("Bot by Wqrld#7373")
+          .setFooter("Made by Asylum Setups | Wqrld#7373")
           //  .setThumbnail(`https://ferox.host/assets/images/logo.png`)
           //.setImage('https://ferox.host/assets/images/logo.png')
           .addField(`Client`, m.author, true)
@@ -192,6 +192,26 @@ client.on("message", message => {
   }
 });
 
+
+
+function createchannel(message, c) {
+  let role = message.guild.roles.find("name", config.CEORole);
+  let role2 = message.guild.roles.find("name", "@everyone");
+  c.overwritePermissions(role, {
+      SEND_MESSAGES: true,
+      READ_MESSAGES: true
+  });
+  c.overwritePermissions(role2, {
+      SEND_MESSAGES: false,
+      READ_MESSAGES: false
+  });
+  c.overwritePermissions(message.author, {
+      SEND_MESSAGES: true,
+      READ_MESSAGES: true
+  });
+
+}
+
 client.on("messageReactionAdd", (reaction, user) => {
   message = reaction.message;
   message.author = user;
@@ -199,7 +219,55 @@ client.on("messageReactionAdd", (reaction, user) => {
   // if (user.bot) return;
   if (
     reaction.message.channel !=
-    reaction.message.guild.channels.find(c => c.name == "create-a-ticket")
+    reaction.message.guild.channels.find(c => c.id == config.createhrchannel)
+  ) {
+    return;
+  }
+  if (reaction.emoji.name !== "🎟" || user.bot) {
+    return;
+  }
+  reaction.remove(user);
+
+  var id = ("" + Math.random() * 1000 + "").substring(0, 4);
+
+
+
+  //     if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
+  reaction.message.guild.createChannel(`ticket-HR-${id}`, "text").then(c => {
+      c.setParent(config.hrchannel);
+      createchannel(reaction.message, c);
+
+
+    
+      const embed = new Discord.RichEmbed()
+          .setColor(config.color)
+          .addField(`HR for ${user.username}`, `Please try explain why you opened this ticket with as much detail as possible. Our **HR team** will be here soon to help.`)
+          .setTimestamp();
+      c.send({
+          embed: embed
+      });
+  }).catch(console.error); // Send errors to console
+
+  
+});
+
+
+
+
+
+
+
+
+
+
+client.on("messageReactionAdd", (reaction, user) => {
+  message = reaction.message;
+  message.author = user;
+
+  // if (user.bot) return;
+  if (
+    reaction.message.channel !=
+    reaction.message.guild.channels.find(c => c.id == config.createticketchannel)
   ) {
     return;
   }

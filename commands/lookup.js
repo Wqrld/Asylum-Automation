@@ -14,7 +14,7 @@ paypal.configure({
 module.exports.run = async (Discord, client, message, commands, args) => {
 
     paypal.invoice.get(message.content.split(" ")[1], function(error, invoice) {
-        message.reply("logged");
+        message.reply("logged the lookup info to our console, this feature is not available to clients yet.");
 console.log(invoice);
 
     });

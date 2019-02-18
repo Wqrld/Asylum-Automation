@@ -32,6 +32,9 @@ if(invoice.status == "SENT"){
 embed.addField(`Status`, "unpaid")
 }else if (invoice.status == "PAID"){
     embed.addField(`Status`, "paid")
+}else if(invoice.status == "UNPAID"){
+    embed.addField(`Status`, "Unpaid")
+
 }else{
     embed.addField(`Status`, invoice.status)
 }

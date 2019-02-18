@@ -9,10 +9,10 @@ module.exports.run = async (Discord, client, message, commands, args) => {
   const embed = new Discord.RichEmbed()
     .setColor(config.color)
     .setTitle(config.name)
-    .setFooter("Order")
+    .setFooter("HR")
     .setThumbnail(config.logo)
     //.setImage('https://ferox.host/assets/images/logo.png')
-    .addField(`Order`, ` React with 🎟 to open a ticket.`)
+    .addField(`HR`, ` React with 🎟 to open a HR ticket.`)
     .setTimestamp();
   message.channel
     .send({
@@ -25,5 +25,5 @@ module.exports.run = async (Discord, client, message, commands, args) => {
 };
 
 module.exports.command = {
-  name: "init"
+  name: "inithr"
 };
