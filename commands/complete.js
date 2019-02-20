@@ -1,5 +1,4 @@
-var redis = require("redis"),
-  red = redis.createClient();
+
 
 const fs = require("fs");
 

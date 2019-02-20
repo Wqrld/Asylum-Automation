@@ -1,7 +1,5 @@
 //Copyright Wqrld#7373, education purposes only. Licensed to Asylum.
 const Discord = require("discord.js");
-var redis = require("redis");
-var red = redis.createClient();
 const fs = require("fs");
 let tickets = JSON.parse(fs.readFileSync("tickets.json", "utf8"));
 var express = require("express");
@@ -48,7 +46,7 @@ client.on("raw", async event => {
 });
 
 client.on("ready", () => {
-  client.user.setActivity("Buy now! >buy", {
+  client.user.setActivity("Buy now! -hr", {
     type: "STREAMING",
     url: "https://www.twitch.tv/monstercat"
   });
@@ -72,7 +70,7 @@ app.listen(1327);
 function requestdeadline(user, m) {
   console.log("requestdeadline");
   var embed = new Discord.RichEmbed()
-    .setColor("#36393f")
+    .setColor(config.color)
     .addField(
       `Order Assistant`,
       "What’s your deadline?\n If you have no deadline say 'no deadline'."
@@ -95,7 +93,7 @@ function requestdeadline(user, m) {
         collector.stop();
 
         var embed = new Discord.RichEmbed()
-          .setColor("#36393f")
+          .setColor(config.color)
           .addField(
             `Order Assistant`,
             "Your request has been sent to our freelancers"
@@ -121,7 +119,7 @@ function requestdeadline(user, m) {
         }
 
         var embed = new Discord.RichEmbed()
-          .setColor(0x55acee)
+          .setColor(config.color)
           .setTitle("Commission")
           .setFooter("Made by Asylum Setups | Wqrld#7373")
           //  .setThumbnail(`https://ferox.host/assets/images/logo.png`)
@@ -149,21 +147,24 @@ function requestdeadline(user, m) {
 
 function welcomemsg(username, c, callback) {
   var embed = new Discord.RichEmbed()
-    .setColor("#36393f")
+    .setColor(config.color)
     .addField(
       `Hey ${username}!`,
       `I will guide you through your ordering process.
 
         Possible services:
 
-        <@&539551691222155274> 
-        <@&539551739746058375> 
-        <@&539551781567332353> 
-        <@&539551826014371840> 
-        <@&539551869450846218> 
-        <@&539551912597520395> 
-        <@&539552006130499594> 
-        <@&539552218454425620>
+        <@&538889704804712458> 
+        <@&538889749558198284> 
+        <@&538890174516428820> 
+        <@&530680327950303252> 
+        <@&538890044467838976> 
+        <@&530680328281391105> 
+        <@&538889822581030915> 
+        <@&530680327950303252>
+        <@&538890044467838976>
+        <@&538890126336720896>
+        <@&538886778577223721>
 
 Please mention the role that matches with the service you need.`
     )
@@ -283,13 +284,13 @@ client.on("messageReactionAdd", (reaction, user) => {
   initwizard(reaction, user);
 });
 function initwizard(reaction, user) {
-  red.get("ticketcount" + user.id, function(err, count) {
-    if (count == null || parseInt(count) < 4) {
-      if (count == null) {
-        red.set("ticketcount" + user.id, 1, redis.print);
-      } else {
-        red.incr("ticketcount" + user.id, redis.print);
-      }
+  // red.get("ticketcount" + user.id, function(err, count) {
+  //   if (count == null || parseInt(count) < 4) {
+  //     if (count == null) {
+  //       red.set("ticketcount" + user.id, 1, redis.print);
+  //     } else {
+  //       red.incr("ticketcount" + user.id, redis.print);
+  //     }
       var nid = ("" + Math.random() * 1000 + "").substring(0, 4);
       message.guild
         .createChannel(`ticket-${nid}`, "text", [
@@ -321,10 +322,8 @@ function initwizard(reaction, user) {
             });
           });
         });
-    } else {
-      user.send("You already have too many tickets opened.");
-    }
-  });
+  
+  
 }
 
 function wizzard(reaction, user, c) {

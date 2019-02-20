@@ -13,7 +13,7 @@ module.exports = async function(client) {
 
     client.on('messageReactionAdd', (reaction, user) => {
 
-        if (reaction.message.channel != reaction.message.guild.channels.find(c => c.id == "539834479267545088")) return;
+        if (reaction.message.channel != reaction.message.guild.channels.find(c => c.id == config.comissionchannel)) return;
 
         if (!user.bot && reaction.emoji.name === "✅" && config.ticketsenabled) {
 
@@ -49,7 +49,7 @@ reaction.remove(user);
             console.log(id + "\n" + channel)
            // red.set("freelancer" + reaction.message.channel.name, user.id, redis.print);
             var embed = new Discord.RichEmbed()
-                .setColor('#36393f')
+                .setColor(config.color)
                 .addField(`Commission claimed`,
                     "<@" + user.id + "> Has claimed your commission.\nPlease discuss a price and when ready type -invoice (email) (amount).")
                 .setTimestamp();

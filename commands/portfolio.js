@@ -18,6 +18,7 @@ module.exports.run = async (Discord, client, message, commands) => {
       users[message.author.id] = {
         type: undefined,
         roles: undefined,
+        paypal: undefined,
         portfolio: undefined
       };
     users[message.author.id].portfolio = message.content.split(" ")[2];
@@ -25,7 +26,7 @@ module.exports.run = async (Discord, client, message, commands) => {
     message.channel.send({
       embed: utils.createembed(
         null,
-        "Portfolio set to  " + message.content.split(" ")[2]
+        "Portfolio set to  " + message.content.split(" ")[2]//works
       )
     });
   } else {

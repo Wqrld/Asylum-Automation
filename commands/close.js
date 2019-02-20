@@ -89,7 +89,7 @@ module.exports.run = async function(Discord, client, message, args) {
             })
               .then(res => res.json())
               .then(json => {
-                var channel = client.channels.get("539549396899987466");
+                var channel = client.channels.get(config.transcriptchannel);
                 const embed = new Discord.RichEmbed()
                   .setColor(0x55acee)
                   .setTitle("Ticket closed")
@@ -109,7 +109,7 @@ module.exports.run = async function(Discord, client, message, args) {
                 m.channel.delete();
               })
               .catch(err => {
-                var channel = client.channels.get("539549396899987466");
+                var channel = client.channels.get(config.transcriptchannel);
                 channel.send(
                   "Transcript for " +
                     message.channel.name +

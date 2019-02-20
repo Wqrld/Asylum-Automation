@@ -3,8 +3,6 @@ var item = require("../item.json");
 const fs = require("fs");
 var config = require("../config.json");
 const fetch = require("node-fetch");
-var redis = require("redis"),
-  red = redis.createClient();
 function roundUp(num, precision) {
   precision = Math.pow(10, precision);
   return Math.ceil(num * precision) / precision;
@@ -33,9 +31,7 @@ module.exports.run = async (Discord, bot, message, args) => {
   //   };
 
   if (
-    !message.channel.name.startsWith(`ticket-`) ||
-    (!message.member.roles.has("539541517271040010") &&
-      !message.member.roles.has("518425575661240320"))
+    (!message.channel.name.startsWith(`ticket-`)) || (!message.member.roles.has(config.freelancerrole))
   ) {
     message.channel.send("Only support staff can make invoices.");
     return;
@@ -77,7 +73,7 @@ module.exports.run = async (Discord, bot, message, args) => {
     prix = prix / 2;
   }
 
-  item.items[0].name = "Asylum Comission";
+  item.items[0].name = config.name;
   item.billing_info[0].email = parseInt(message.content.split(" ")[1]);
   item.items[0].unit_price.value = prix;
   paypal.invoice.create(item, function(error, invoice) {
@@ -90,8 +86,8 @@ module.exports.run = async (Discord, bot, message, args) => {
 
       var encoded = invoice.links[4].href.replace("#", "%23");
       let embed = new Discord.RichEmbed()
-        .setColor("#7289DA")
-        .setTitle("Asylum | Invoice")
+        .setColor(config.color)
+        .setTitle(config.name + " | Invoice")
         .addField(
           `We have created an invoice with the following amount: **_$${prix},-_**\nPlease pay here:`,
           `https://www.paypal.com/invoice/payerView/details/${invoice.id}`
