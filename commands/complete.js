@@ -73,13 +73,14 @@ module.exports.run = async (Discord, client, message, args) => {
 
   message.channel.setParent(config.completechannel);
 
-
+if(tickets[message.channel.id].client){
   message.channel.overwritePermissions(
     message.guild.members.find("id", tickets[message.channel.id].client), {
       SEND_MESSAGES: false,
       READ_MESSAGES: false
     }
   );
+  }
   const embed = new Discord.RichEmbed()
     .setColor(config.color)
     .addField(`Hey ${message.author.username}!`, `Commission complete.`)
