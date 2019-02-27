@@ -103,8 +103,8 @@ if(tickets[message.channel.id].client){
     embed.addField("Company", config.cuts.company * t.price + "$", true);
   }
 
-  if (!users[message.author.id])
-  users[message.author.id] = {
+  if (!users[t.freelancer])
+  users[t.freelancer] = {
     type: undefined,
     roles: undefined,
     paypal: undefined,
