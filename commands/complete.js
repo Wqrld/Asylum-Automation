@@ -52,6 +52,7 @@ function savetickets() {
 module.exports.run = async (Discord, client, message, args) => {
   let config = JSON.parse(fs.readFileSync("config.json", "utf8"));
   let tickets = JSON.parse(fs.readFileSync("tickets.json", "utf8"));
+  let users = JSON.parse(fs.readFileSync("users.json", "utf8"));
   console.log(message.author.name);
   if (
     message.member.roles.find("name", config.CEORole) == undefined
@@ -100,6 +101,16 @@ module.exports.run = async (Discord, client, message, args) => {
     embed.addField("Sales Rep", config.cuts.salesrep * t.price + "$", true);
     embed.addField("Company", config.cuts.company * t.price + "$", true);
   }
+
+  if (!users[message.author.id])
+  users[message.author.id] = {
+    type: undefined,
+    roles: undefined,
+    paypal: undefined,
+    portfolio: undefined
+  };
+
+embed.addField("Freelancer paypal", users[message.author.id].paypal)
 
   embed.setFooter(t.client);
   message.channel.send({
