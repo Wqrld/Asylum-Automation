@@ -111,7 +111,7 @@ if(tickets[message.channel.id].client){
     portfolio: undefined
   };
 
-embed.addField("Freelancer paypal", users[message.author.id].paypal)
+embed.addField("Freelancer paypal", users[t.freelancer].paypal)
 
   embed.setFooter(t.client);
   message.channel.send({
