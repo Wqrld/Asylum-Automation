@@ -7,6 +7,7 @@ const fs = require("fs");
 
 module.exports = async function(client) {
     let config = JSON.parse(fs.readFileSync("config.json", "utf8"));
+    let users = JSON.parse(fs.readFileSync("users.json", "utf8"));
 
     
 //t
@@ -51,7 +52,7 @@ reaction.remove(user);
             var embed = new Discord.RichEmbed()
                 .setColor(config.color)
                 .addField(`Commission claimed`,
-                    "<@" + user.id + "> Has claimed your commission.\nPlease discuss a price and when ready type -invoice (email) (amount).")
+                    "<@" + user.id + "> Has claimed your commission.\nPlease discuss a price and when ready type -invoice (email) (amount).\nPortfolio: " + users[message.author.id].portfolio)
                 .setTimestamp();
             channel.send({
                 embed: embed

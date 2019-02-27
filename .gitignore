@@ -3,3 +3,5 @@ node_modules
 config.json
 db.db
 dump.sql
+users.json
+tickets.json

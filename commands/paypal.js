@@ -1,10 +1,9 @@
-var redis = require("redis"),
-    red = redis.createClient();
+const fs = require("fs")
     
 module.exports.run = async (Discord, client, message, args) => {
   let config = JSON.parse(fs.readFileSync("config.json", "utf8"));
   var arg = message.content.split(' ');
-
+  let users = JSON.parse(fs.readFileSync("users.json", "utf8"));
 if(arg[1] == undefined){
   message.reply("-paypal (email)");
   return;
@@ -22,7 +21,7 @@ users[message.author.id].paypal = arg[1];
   fs.writeFile("users.json", JSON.stringify(users, null, 4));
 var embed = new Discord.RichEmbed()
             .setColor(config.color)
-            .addField(`Paypal set`,
+            .addField('Paypal set',
                 "paypal set to: " + arg[1])
             .setTimestamp();
         message.channel.send({
@@ -35,7 +34,7 @@ var embed = new Discord.RichEmbed()
 
 
 
-        })
+        });
 
 
 }
